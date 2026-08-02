@@ -1,26 +1,93 @@
+.search-page {
+    padding-bottom: 2rem;
+}
+
 /* Task 1: Style the search input field */
 .search-input {
-    /* Insert specific CSS properties here */
+    padding: 0.75rem;
+    font-size: 1rem;
 }
 
 /* Task 2: Style the search button */
 .search-button {
-    /* Insert specific CSS properties here */
+    width: 100%;
+    padding: 0.75rem;
+    font-weight: bold;
 }
 
-/* Task 3: Customize dropdown filters */
-.dropdown-filter {
-    /* Insert specific CSS properties here */
+/* Task 3: Customize dropdown filters for category and condition */
+.filter-section {
+    background-color: #f8f9fa;
+}
+
+.filter-section label {
+    font-weight: bold;
+    margin-bottom: 0.25rem;
+}
+
+.filter-section select {
+    padding: 0.75rem;
+    font-size: 1rem;
 }
 
 /* Task 4: Style the age range slider */
-.age-range-slider {
-    /* Insert specific CSS properties here */
+.form-range {
+    cursor: pointer;
 }
 
 /* Task 5: Enhance search results cards appearance */
-.search-results-card {
-    /* Insert specific CSS properties here */
+.search-result-card {
+    cursor: pointer;
+    height: 100%;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Additional placeholders for tasks 6 to 10 */
+/* Task 7: Apply a hover effect to the search results cards */
+.search-result-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Task 8: Ensure images in search results are displayed appropriately */
+.search-result-image {
+    height: 200px;
+    object-fit: cover;
+}
+
+/* No image placeholder */
+.no-image-available {
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e9ecef;
+    color: #6c757d;
+    font-weight: bold;
+}
+
+/* Task 6: Style the “No products found” alert message */
+.no-products-alert {
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Task 9: Create a responsive layout for search results on various devices */
+@media (max-width: 768px) {
+    .search-button {
+        width: 100%;
+    }
+
+    .search-result-image,
+    .no-image-available {
+        height: 180px;
+    }
+}
+
+/* Task 10: Overall page styling for a cohesive and user-friendly design */
+.search-page .card-title {
+    font-weight: bold;
+}
+
+.search-page .card-text {
+    margin-bottom: 0.5rem;
+}
