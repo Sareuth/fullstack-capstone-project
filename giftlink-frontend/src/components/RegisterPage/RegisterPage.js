@@ -1,5 +1,11 @@
 import React, { useState } from 'react';
 
+import { urlConfig } from '../../config';
+
+import { useAppContext } from '../../context/AuthContext';
+
+import { useNavigate } from 'react-router-dom';
+
 import './RegisterPage.css';
 
 function RegisterPage() {
@@ -8,10 +14,49 @@ function RegisterPage() {
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [showerr, setShowerr] = useState('');
+
+    const navigate = useNavigate();
+    const { setIsLoggedIn, setUserName } = useAppContext();
 
     // insert code here to create handleRegister function and include console.log
     const handleRegister = async () => {
-        console.log("Register invoked", { firstName, lastName, email, password });
+        try {
+            setShowerr('');
+
+            const response = await fetch(`${urlConfig.backendUrl}/api/auth/register`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    firstName,
+                    lastName,
+                    email,
+                    password,
+                }),
+            });
+
+            const json = await response.json();
+
+            if (json.authtoken) {
+                sessionStorage.setItem('auth-token', json.authtoken);
+                sessionStorage.setItem('name', firstName);
+                sessionStorage.setItem('email', email);
+
+                setIsLoggedIn(true);
+                setUserName(firstName);
+
+                navigate('/app');
+            }
+
+            if (json.error) {
+                setShowerr(json.error || 'Registration failed');
+            }
+        } catch (e) {
+            console.log("Error fetching details: " + e.message);
+            setShowerr('Registration failed. Please try again.');
+        }
     }
 
     return (
@@ -55,6 +100,9 @@ function RegisterPage() {
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                             />
+                            {showerr && (
+                                <div className="text-danger">{showerr}</div>
+                            )}
                         </div>
 
                         <div className="mb-4">
