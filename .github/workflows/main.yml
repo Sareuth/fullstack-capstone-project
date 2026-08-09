@@ -21,7 +21,7 @@ jobs:
           node-version: 14
 
       - name: Install JSHint
-        run: npm install jshint --global --silent
+        run: npm install jshint --global
 
       - name: Run Linter
         run: |
