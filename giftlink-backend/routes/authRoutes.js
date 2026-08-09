@@ -1,3 +1,4 @@
+/*jshint esversion: 8 */
 //Step 1 - Task 2: Import necessary packages
 const express = require('express');
 const app = express();
@@ -67,7 +68,7 @@ router.post('/login', async (req, res) => {
         const theUser = await collection.findOne({ email: req.body.email });
         // Task 4: Task 4: Check if the password matches the encrypyted password and send appropriate message on mismatch
         if (theUser) {
-            let result = await bcryptjs.compare(req.body.password, theUser.password)
+            let result = await bcryptjs.compare(req.body.password, theUser.password);
             if (!result) {
                 logger.error('Passwords do not match');
                 return res.status(404).json({ error: 'Wrong password' });
